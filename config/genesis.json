@@ -1,0 +1,72 @@
+{
+  "config": {
+    "chainId": 5858,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "berlinBlock": 0,
+    "londonBlock": 0,
+    "arrowGlacierBlock": 0,
+    "grayGlacierBlock": 0,
+    "mergeNetsplitBlock": 8858576,
+    "terminalTotalDifficulty": 12247751,
+    "terminalTotalDifficultyPassed": true,
+    "shanghaiTime": 1765981184,
+    "cancunTime": 1765981500,
+    "pragueTime": 1765981500,
+    "osakaTime": 1765981500,
+    "bpo1Time": 1765981500,
+    "bpo2Time": 1765981500,
+    "blobSchedule": {
+      "cancun": {
+        "target": 3,
+        "max": 6,
+        "baseFeeUpdateFraction": 3338477
+      },
+      "prague": {
+        "target": 6,
+        "max": 9,
+        "baseFeeUpdateFraction": 5007716
+      },
+      "osaka": {
+        "target": 6,
+        "max": 9,
+        "baseFeeUpdateFraction": 5007716
+      },
+      "bpo1": {
+        "target": 10,
+        "max": 15,
+        "baseFeeUpdateFraction": 8346193
+      },
+      "bpo2": {
+        "target": 14,
+        "max": 21,
+        "baseFeeUpdateFraction": 11684671
+      }
+    },
+    "depositContractAddress": "0xdBae1F627D2C8D13f7a74c99d57B5EC6EED25643",
+    "clique": {
+      "period": 5,
+      "epoch": 30000
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x669A772F",
+  "difficulty": "1",
+  "gasLimit": "30000000",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "baseFeePerGas": "0x2540BE400",
+  "extradata": "0x000000000000000000000000000000000000000000000000000000000000000032189ca0be2ef8EEA71f642A3b43175BEF76b1aC0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "alloc": {
+    "27b524C2BfBCc32Bb75a02A87Bb0122641FF6A10": { "balance": "10000000000000000000000000000" }
+  },
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000"
+}

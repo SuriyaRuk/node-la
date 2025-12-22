@@ -1,0 +1,103 @@
+services:
+  geth:
+    image: ethereum/client-go:v1.16.7
+    restart: always
+    network_mode: host
+    user: root
+    entrypoint: /root/init-script.sh
+    command:
+      - --datadir=/data
+      - --networkid=5858
+      - --syncmode=full
+      - --gcmode=archive
+      - --history.state=0
+      - --history.transactions=0
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.api=debug,web3,eth,txpool,net,admin,engine
+      - --http.vhosts="*"
+      - --http.corsdomain="*"
+      - --ws 
+      - --ws.addr=0.0.0.0
+      - --ws.api=debug,web3,eth,txpool,net,engin,admin
+      - --ws.origins="*"
+      - --db.engine=pebble
+      - --authrpc.port=8551
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.vhosts=*
+      - --authrpc.jwtsecret=/config/jwt.hex
+      - --nat=extip:${NODE_PUBLIC_IP}
+      - --nodekey=/config/nodekey
+      - --bootnodes=${ELNODES}
+    volumes:
+        - ./data/geth:/data
+        - ./config:/config
+        - ./init-script.sh:/root/init-script.sh
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  beacon:
+    image: sigp/lighthouse:v8.0.1
+    restart: always
+    network_mode: host
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - ./data/lighthouse:/root/.lighthouse
+      - ./config:/config
+    command: >
+      lighthouse beacon_node
+      --testnet-dir /config
+      --datadir /root/.lighthouse
+      --http
+      --http-address 0.0.0.0
+      --http-port 5052
+      --execution-endpoint http://${NODE_PUBLIC_IP}:8551
+      --execution-jwt /config/jwt.hex
+      --enr-udp-port 9000
+      --enr-tcp-port 9000
+      --port 9000
+      --http-allow-origin=*
+      --listen-address=0.0.0.0
+      --discovery-port 9000
+      --suggested-fee-recipient=${FEE_RECIPIENT}
+      --disable-enr-auto-update 
+      --enr-address=${NODE_PUBLIC_IP}
+      --staking
+      --supernode
+      --boot-nodes=${CLNODES}
+      --checkpoint-sync-url=https://cl.cthscan.com
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+      
+  validator:
+    image: sigp/lighthouse:v8.0.1
+    security_opt:
+      - seccomp:unconfined
+    network_mode: host
+    command:
+      - lighthouse
+      - vc
+      - --debug-level=info
+      - --testnet-dir=/config
+      - --init-slashing-protection
+      - --beacon-nodes=http://${NODE_PUBLIC_IP}:5052
+      - --suggested-fee-recipient=${FEE_RECIPIENT}
+      - --graffiti=${NODE_GRAFFITI}
+    volumes:
+      - ./data/lighthouse:/root/.lighthouse
+      - ./config:/config
+    depends_on:
+      - beacon
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
