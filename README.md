@@ -51,8 +51,8 @@ Before deploying, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd public-pos
+git clone https://github.com/Chang-Chain-Foundation/node.git
+cd node
 ```
 
 ### Step 2: Configure Environment Variables
@@ -60,21 +60,23 @@ cd public-pos
 Edit the `.env` file to configure your node:
 
 ```bash
-nano .env
+vim .env
 ```
 
 **Required Configuration**:
 
 ```env
 ## BOOTNODE Configuration
-NODE_PUBLIC_IP=         # Will be auto-detected by update script
+NODE_PUBLIC_IP=49.13.153.208
 CHAIN_ID=5858
-ELNODES=<execution-layer-bootnodes>
-CLNODES=<consensus-layer-bootnodes>
+ELNODES=enode://ca2d0011d2561ea1af8f3ca4adbe1cc00f778394e7c24879fdd7d4cc1317c1fe1673bd683f5c7acd5842d0b54fed88acbab60f942f82900893d76b406229fc48@152.42.244.16:30303,enode://b88bb8937836ce1d9a284c5a45113955ab72c171733688e234c86b9daa494b57f6b85a363626e875124b0e3e96662ff55d11b9e0f625c8c16591228c7a157da2@5.78.64.180:30303,enode://b6e3e76d6f62e8e7770e509d49074a6f3023c9389d717da441199e83adecde1be286b78d7105c8bf1c0d2d6400587d6c51757f2d745e523bf52e655893618328@159.69.17.47:30303
+CLNODES=enr:-Oy4QPK7ODcgObGdqVV99SDTu0QBu-aLZ1sLk56s8fpaKC5xPr0-vgDLkpBoqAf9GTq2qnpe-Fxl6_-zyn3uLk8cS9gHh2F0dG5ldHOIAAAAYAAAAACDY2djgYCGY2xpZW500YpMaWdodGhvdXNlhTguMC4xhGV0aDKQnOXLznAAADj__________4JpZIJ2NIJpcISYKvQQg25mZISc5cvOhHF1aWOCIymJc2VjcDI1NmsxoQKUgCQ443y4S7En-HX_1ULYNe9JyO0CmYSd1wi2UKaZk4hzeW5jbmV0cw-DdGNwgiMog3VkcIIjKA,enr:-Oy4QKgqIwIZMrYYpHgN4x6ogyMXR1-RRTUasCVATNFkUfDOTZJ3fFT73Lqsvfn0ZMBDi2uCdjJRbO99Dob-DzYNsHAOh2F0dG5ldHOIAAYAAAAAAACDY2djgYCGY2xpZW500YpMaWdodGhvdXNlhTguMC4xhGV0aDKQnOXLznAAADj__________4JpZIJ2NIJpcIQFTkC0g25mZISc5cvOhHF1aWOCIymJc2VjcDI1NmsxoQLfVaQOqoPqmU0E0BVB7uUpulMEr8AhnNrR3fxlxaB__IhzeW5jbmV0cw-DdGNwgiMog3VkcIIjKA,enr:-Oy4QO7KTH-sgrhK5ArKebThS1gbIKdrdD7Hby63CLLXTKpoXYT79HPSZR5Hl7UBGIfJOv_1RMFWtOAzOEH8piCDDkgKh2F0dG5ldHOIAIABAAAAAACDY2djgYCGY2xpZW500YpMaWdodGhvdXNlhTguMC4xhGV0aDKQnOXLznAAADj__________4JpZIJ2NIJpcISfRREvg25mZISc5cvOhHF1aWOCIymJc2VjcDI1NmsxoQK9L26-JTtzWSHrmIZH5nfqS_eNE03ZdQOCCfkQ5zPDjIhzeW5jbmV0cw-DdGNwgiMog3VkcIIjKA
 
-## VALIDATOR Configuration (if running validator)
-FEE_RECIPIENT=0xYourWalletAddress
-NODE_GRAFFITI=YourNodeIdentifier  # e.g., node1_cth-thai
+## VALIDATOR Configuration
+FEE_RECIPIENT=<Your Address For fee reception>
+NODE_GRAFFITI=ChangeItForIdentityYourNode1NodePer1GraffitiOnly 
+# example. NODE_GRAFFITI=node1_cth-thai
+
 ```
 
 - `NODE_PUBLIC_IP`: Your server's public IP (auto-detected in next step)
