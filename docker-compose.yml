@@ -104,7 +104,6 @@ services:
       - --beacon-nodes=http://${NODE_PUBLIC_IP:-127.0.0.1}:${CL_HTTP_PORT:-5052}
       - --suggested-fee-recipient=${FEE_RECIPIENT}
       - --graffiti=${NODE_GRAFFITI}
-      - --validators-dir /keystores/validators 
     volumes:
       - ./data/lighthouse:/root/.lighthouse
       - ./config:/config
