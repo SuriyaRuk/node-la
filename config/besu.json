@@ -11,9 +11,9 @@
     "istanbulBlock": 0,
     "berlinBlock": 0,
     "londonBlock": 0,
-    "mergeNetsplitBlock": 0,
+    "preMergeForkBlock": 0,
     "terminalTotalDifficulty": 0,
-    "terminalTotalDifficultyPassed": true,
+    "ethash": {},
     "shanghaiTime": 0,
     "cancunTime": 0,
     "blobSchedule": {
@@ -29,6 +29,8 @@
       }
     },
     "depositContractAddress": "0x5454545454545454545454545454545454545454",
+    "withdrawalRequestContractAddress": "0x00000961Ef480Eb55e80D19ad83579A64c007002",
+    "consolidationRequestContractAddress": "0x0000BBdDc7CE488642fb579F8B00f3a590007251",
     "pragueTime": 0
   },
   "alloc": {
@@ -868,8 +870,9 @@
     }
   },
   "coinbase": "0x0000000000000000000000000000000000000000",
+  "baseFeePerGas": "0x3B9ACA00",
   "difficulty": "0x0",
-  "extraData": "0x4c4142e29da4efb88f4f733535352658616e676e616d2d4c414f4954444556",
+  "extraData": "",
   "gasLimit": "0x2aea540",
   "nonce": "0x1234",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",

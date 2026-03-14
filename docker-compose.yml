@@ -1,31 +1,41 @@
 services:
-  geth:
-    image: ethereum/client-go:v1.16.7
+  reth:
+    image: ${RETH_IMAGE:-ghcr.io/paradigmxyz/reth:v1.8.3}
     restart: always
+    environment:
+      - RUST_LOG=${RETH_LOG_LEVEL:-info}
+    stop_grace_period: 30s
     network_mode: host
     entrypoint: /root/init-script.sh
+    env_file:
+      - .env
     command:
+      - node 
+      - --chain=/chainspec/genesis.json 
       - --datadir=/data
-      - --networkid=5858
       - --http
       - --http.addr=0.0.0.0
+      - --http.port ${EL_HTTP_PORT:-8545} 
       - --http.api=debug,web3,eth,txpool,net,admin
       - --http.vhosts="*"
       - --http.corsdomain="*"
       - --ws 
       - --ws.addr=0.0.0.0
+      - --ws.port ${EL_WS_PORT:-8546}
       - --ws.api=debug,web3,eth,txpool,net,admin
       - --ws.origins="*"
       - --db.engine=pebble
-      - --authrpc.port=8551
       - --authrpc.addr=0.0.0.0
       - --authrpc.vhosts=*
       - --authrpc.jwtsecret=/config/jwt.hex
       - --nat=extip:${NODE_PUBLIC_IP}
       - --nodekey=/config/nodekey
-      - --bootnodes=${ELNODES}
+      - --bootnodes=${EL_NODES}
+      - --authrpc.port=${EL_AUTHRPC_PORT:-8551} 
+      - --port=${P2P_PORT:-30303} 
+      - --discovery.port=${P2P_PORT:-30303} 
     volumes:
-        - ./data/geth:/data
+        - ./data/reth:/data
         - ./config:/config
         - ./init-script.sh:/root/init-script.sh
     logging:
@@ -38,6 +48,11 @@ services:
     image: sigp/lighthouse:v8.0.1
     restart: always
     network_mode: host
+    env_file:
+      - .env
+    environment:
+      - RUST_LOG=${LIGHTHOUSE_LOG_LEVEL:-info}
+    stop_grace_period: 30s
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -49,12 +64,12 @@ services:
       --datadir /root/.lighthouse
       --http
       --http-address 0.0.0.0
-      --http-port 5052
-      --execution-endpoint http://${NODE_PUBLIC_IP}:8551
+      --http-port ${CL_HTTP_PORT:-5052}
+      --execution-endpoint http://${NODE_PUBLIC_IP:-127.0.0.1}:${EL_AUTHRPC_PORT:-8551}
       --execution-jwt /config/jwt.hex
-      --enr-udp-port 9000
-      --enr-tcp-port 9000
-      --port 9000
+      --enr-udp-port ${CL_P2P_PORT:-9000} 
+      --enr-tcp-port ${CL_P2P_PORT:-9000} 
+      --port ${CL_P2P_PORT:-9000} 
       --http-allow-origin=*
       --listen-address=0.0.0.0
       --discovery-port 9000
@@ -63,8 +78,9 @@ services:
       --enr-address=${NODE_PUBLIC_IP}
       --staking
       --supernode
-      --boot-nodes=${CLNODES}
-      --checkpoint-sync-url=https://cl.cthscan.com
+      --boot-nodes=${CL_NODES}
+      --checkpoint-sync-url=https://checkpoin.labchain.la
+      --target-peers ${TARGET_PEERS:-64}
     logging:
       driver: "json-file"
       options:
@@ -76,15 +92,19 @@ services:
     security_opt:
       - seccomp:unconfined
     network_mode: host
+    stop_grace_period: 30s
+    env_file:
+      - .env
     command:
       - lighthouse
       - vc
       - --debug-level=info
       - --testnet-dir=/config
       - --init-slashing-protection
-      - --beacon-nodes=http://${NODE_PUBLIC_IP}:5052
+      - --beacon-nodes=http://${NODE_PUBLIC_IP:-127.0.0.1}:${CL_HTTP_PORT:-5052}
       - --suggested-fee-recipient=${FEE_RECIPIENT}
       - --graffiti=${NODE_GRAFFITI}
+      - --validators-dir /keystores/validators 
     volumes:
       - ./data/lighthouse:/root/.lighthouse
       - ./config:/config

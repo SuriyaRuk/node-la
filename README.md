@@ -6,15 +6,15 @@ A Proof-of-Stake (PoS) blockchain network deployment for CTH using Ethereum's ex
 
 This repository contains the deployment configuration for running a CTH blockchain node. The CTH network uses:
 
-* **Execution Layer**: Geth v1.16.7 (Ethereum client)
+* **Execution Layer**: Reth v1.8.3 (Ethereum client)
 * **Consensus Layer**: Lighthouse v8.0.1 (Beacon Chain)
 * **Validator Client**: Lighthouse v8.0.1
 
 ### Network Details
 
-* **Network ID**: 5858
-* **Chain ID**: 5858
-* **Checkpoint Sync URL**: https://cl.cthscan.com
+* **Network ID**: 5222
+* **Chain ID**: 5222
+* **Checkpoint Sync URL**: https://checkpoin.labchain.la
 * **Consensus Mechanism**: Proof of Stake (PoS)
 
 ## Prerequisites
@@ -36,7 +36,7 @@ Before deploying, ensure you have the following installed:
 │   ├── genesis.ssz        # Genesis state for beacon chain
 │   └── deposit_contract.txt
 ├── data/                  # Node data (created automatically)
-│   ├── geth/             # Geth blockchain data
+│   ├── reth/             # Geth blockchain data
 │   └── lighthouse/       # Lighthouse beacon & validator data
 ├── keys/                 # Validator keys (for validators only)
 ├── .env                  # Environment configuration
@@ -53,14 +53,14 @@ Before deploying, ensure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Chang-Chain-Foundation/node.git
-cd node
+git clone https://github.com/SuriyaRuk/node-la
+cd node-la
 ```
 
 Example output:
 
 ```bash
-Cloning into 'node'...
+Cloning into 'node-la'...
 remote: Enumerating objects: 17, done.
 remote: Counting objects: 100% (17/17), done.
 remote: Compressing objects: 100% (13/13), done.

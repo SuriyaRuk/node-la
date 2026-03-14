@@ -1,5 +1,5 @@
 #!/bin/sh
 
-geth --db.engine=pebble --datadir /data  init /config/genesis.json
+reth init --chain /chainspec/genesis.json --datadir /data
 
-exec geth "$@"
+exec reth "$@"
