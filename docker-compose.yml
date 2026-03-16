@@ -23,7 +23,6 @@ services:
       - --ws.port=${EL_WS_PORT:-8546}
       - --ws.api=debug,web3,eth,txpool,net,admin
       - --ws.origins="*"
-      - --db.engine=pebble
       - --authrpc.addr=0.0.0.0
       - --authrpc.vhosts=*
       - --authrpc.jwtsecret=/config/jwt.hex
