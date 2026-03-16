@@ -45,6 +45,7 @@ fi
 echo "Done!"
 
 echo "Generating nodekey..."
-openssl rand -hex 32 > ./config/nodekey
+#openssl rand -hex 32 > ./config/nodekey
+openssl rand -hex 32 | tr -d '\n' > ./config/nodekey
 echo "nodekey generated successfully"
 echo "nodekey: $(cat ./config/nodekey)"
