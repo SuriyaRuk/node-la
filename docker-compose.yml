@@ -17,7 +17,6 @@ services:
       - --http.addr=0.0.0.0
       - --http.port=${EL_HTTP_PORT:-8545} 
       - --http.api=debug,web3,eth,txpool,net,admin
-      - --http.vhosts="*"
       - --http.corsdomain="*"
       - --ws 
       - --ws.addr=0.0.0.0
