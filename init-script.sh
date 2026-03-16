@@ -1,5 +1,5 @@
 #!/bin/sh
 
-reth init --chain /chainspec/genesis.json --datadir /data
+reth init --chain /config/genesis.json --datadir /data
 
 exec reth "$@"

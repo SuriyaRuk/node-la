@@ -11,7 +11,7 @@ services:
       - .env
     command:
       - node 
-      - --chain=/chainspec/genesis.json 
+      - --chain=/config/genesis.json 
       - --datadir=/data
       - --http
       - --http.addr=0.0.0.0
