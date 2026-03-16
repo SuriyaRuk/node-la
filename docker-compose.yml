@@ -64,7 +64,7 @@ services:
       --http-address 0.0.0.0
       --http-port ${CL_HTTP_PORT:-5052}
       --execution-endpoint http://${NODE_PUBLIC_IP:-127.0.0.1}:${EL_AUTHRPC_PORT:-8551}
-      --execution-jwt /config/jwt.hex
+      --execution-jwt /config/jwtsecret
       --enr-udp-port ${CL_P2P_PORT:-9000} 
       --enr-tcp-port ${CL_P2P_PORT:-9000} 
       --port ${CL_P2P_PORT:-9000} 
@@ -77,14 +77,16 @@ services:
       --staking
       --supernode
       --boot-nodes=${CL_NODES}
-      --checkpoint-sync-url=https://checkpoin.labchain.la
       --target-peers ${TARGET_PEERS:-64}
+      --allow-insecure-genesis-sync
     logging:
       driver: "json-file"
       options:
         max-size: "100m"
         max-file: "10"
       
+ #     --checkpoint-sync-url=https://checkpoin.labchain.la
+
   validator:
     image: sigp/lighthouse:v8.0.1
     security_opt:
