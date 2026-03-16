@@ -24,7 +24,6 @@ services:
       - --ws.api=debug,web3,eth,txpool,net,admin
       - --ws.origins="*"
       - --authrpc.addr=0.0.0.0
-      - --authrpc.vhosts=*
       - --authrpc.jwtsecret=/config/jwt.hex
       - --nat=extip:${NODE_PUBLIC_IP}
       - --nodekey=/config/nodekey
