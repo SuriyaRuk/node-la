@@ -20,7 +20,7 @@ services:
       - --http.corsdomain="*"
       - --ws 
       - --ws.addr=0.0.0.0
-      - --ws.port ${EL_WS_PORT:-8546}
+      - --ws.port=${EL_WS_PORT:-8546}
       - --ws.api=debug,web3,eth,txpool,net,admin
       - --ws.origins="*"
       - --db.engine=pebble
