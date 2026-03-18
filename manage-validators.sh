@@ -27,7 +27,7 @@ readonly NC='\033[0m'
 # Default Configuration
 # =============================================================================
 OUTPUT_DIR="./output"
-MANAGED_ROOT="./key"
+MANAGED_ROOT="./keys"
 CONSENSUS_DIR="./config"
 WITHDRAWAL_ADDRESS=""
 VALIDATOR_COUNT=1
