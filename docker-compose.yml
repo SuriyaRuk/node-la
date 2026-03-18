@@ -87,7 +87,7 @@ services:
  #     --checkpoint-sync-url=https://checkpoin.labchain.la
 
   validator:
-    image: sigp/lighthouse:v8.0.1
+    image: ${LIGHTHOUSE_IMAGE:-sigp/lighthouse:latest}
     security_opt:
       - seccomp:unconfined
     network_mode: host
@@ -103,9 +103,11 @@ services:
       - --beacon-nodes=http://${NODE_PUBLIC_IP:-127.0.0.1}:${CL_HTTP_PORT:-5052}
       - --suggested-fee-recipient=${FEE_RECIPIENT}
       - --graffiti=${NODE_GRAFFITI}
+      - --validators-dir /keystores/validators 
     volumes:
       - ./data/lighthouse:/root/.lighthouse
       - ./config:/config
+      - ./keys:/keystores
     depends_on:
       - beacon
     restart: always
