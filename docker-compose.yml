@@ -104,6 +104,7 @@ services:
       - --suggested-fee-recipient=${FEE_RECIPIENT}
       - --graffiti=${NODE_GRAFFITI}
       - --validators-dir=/keystores/validators 
+      - --secrets-dir=/keystores/secrets
     volumes:
       - ./data/lighthouse:/root/.lighthouse
       - ./config:/config
